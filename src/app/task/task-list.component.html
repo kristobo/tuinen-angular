@@ -1,0 +1,17 @@
+
+<div class="task-list row">
+    <div class="container">
+        <div class="col s12 m6 offset-m3">
+            <h2>Overzicht taken</h2>
+
+            <app-task
+                    *ngFor="let task of tasks"
+                    [task]="task">
+            </app-task>
+
+        </div>
+    </div>
+
+</div>
+
+

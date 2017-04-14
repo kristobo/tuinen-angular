@@ -1,0 +1,49 @@
+<section class="login-form row">
+    <div class="container">
+        <div class="col s12 m6 offset-m3">
+            <img src="assets/logo.png" alt="Logo" class="logo" >
+            <h1 *ngIf="!loading">Login</h1>
+
+            <div *ngIf="loading" class="spinner">
+                <div class="d1"></div>
+                <div class="d2"></div>
+            </div>
+
+            <div *ngIf="message" class="error">{{message}}</div>
+
+            <form *ngIf="!loading" [formGroup]="loginForm"
+                  (ngSubmit)="onSubmit(loginForm)">
+
+                <div class="textfield-wrapper"
+                     [class.has-error]="!loginForm.controls['username'].valid
+                            && loginForm.controls['username'].touched">
+
+                    <label for="username">Geef uw gebruikersnaam in:</label>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa-lg"></i></span>
+                        <input class="textfield-input" type="text" id="username" placeholder="Gebruikersnaam" formControlName="username">
+                    </div>
+                </div>
+
+                <div class="textfield-wrapper"
+                     [class.has-error]="!loginForm.controls['password'].valid
+                            && loginForm.controls['password'].touched">
+
+                    <label for="password">Geef u paswoord in:</label>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock fa-lg"></i></span>
+                        <input class="textfield-input" type="password" id="password" placeholder="Paswoord" formControlName="password">
+                    </div>
+
+                </div>
+
+                <button class="btn login-button" [disabled]="!loginForm.valid">
+                    Inloggen
+                </button>
+            </form>
+
+        </div>
+    </div>
+</section>

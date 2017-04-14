@@ -1,0 +1,161 @@
+/* Global styles */
+$green: #30B996;
+$blue: #0081ae;
+$red: #EF402C;
+/* Variables */
+
+
+/* Styles */
+
+/* Icons */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url('../font/font.woff2') format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+body,html{
+  height:100%;
+}
+body{
+  background: $green;
+  color: #ffffff;
+  letter-spacing: 1px;
+
+  @include background-image(linear-gradient($green, $blue));
+}
+
+h1{
+  font-size: 2em;
+}
+h2{
+  font-size: 1.4em;
+  font-weight: 300;
+  text-align: center;
+}
+
+input {
+  outline: none;
+}
+
+.error{
+  background-color: #DB150F;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+
+
+/* Header*/
+nav {
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: none;
+
+  .logo {
+    float:left;
+    margin: 10px 18px 0;
+    @include opacity(0.7);
+
+    img{
+      height:30px;
+      width:30px;
+    }
+  }
+
+  .button-collapse{
+    float:right;
+  }
+
+}
+
+/* Tables */
+.table{
+  .table-header{
+    padding: 8px 16px;
+    background-color: rgba(0, 0, 0, 0.64);
+  }
+  .table-body{
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 16px;
+    color: rgba(0, 0, 0, 0.64);
+    font-size: 1em;
+    font-weight: 400;
+  }
+}
+
+/* SideMenu */
+.side-nav{
+  background: $green;
+
+  @include background-image(linear-gradient($green, $blue));
+
+  a{
+    color: #ffffff;
+    letter-spacing: 2px;
+    &.active{
+      background-color: rgba(0,0,0,0.05);
+     }
+  }
+
+}
+
+/* Spinner */
+.spinner {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+  margin: 100px auto;
+}
+
+.d1, .d2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.d2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% {
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+    }
+}
+

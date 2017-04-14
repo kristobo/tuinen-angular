@@ -1,0 +1,30 @@
+/* Task row */
+
+.task-item{
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.24);
+  padding: 12px 16px;
+  margin-bottom: 8px;
+
+  @include display-flex();
+  @include flex-direction(row);
+
+  .icon{
+    width: 32px;
+    padding: 8px 0px;
+  }
+
+  .content{
+    width: 100%;
+
+    @include flex-direction(column);
+
+    .title{}
+
+    .category{
+      font-weight:300;
+    }
+  }
+}
+
+

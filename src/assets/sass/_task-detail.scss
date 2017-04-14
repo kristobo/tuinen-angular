@@ -1,0 +1,59 @@
+/* Task detail */
+
+.task-detail{
+  font-weight:300;
+
+  .detail-header{
+    margin: 30px -.75rem;
+
+
+    .intro{
+      .name{
+        font-size:1.6em;
+      }
+      .adress{
+        font-size:1.2em;
+      }
+    }
+
+    .quick-list-btn {
+      color: #fff;
+      margin-right: -0.75em;
+      padding:0;
+      float:right;
+      i{
+        font-size: 1.8em;
+      }
+    }
+  }
+
+  .actions{
+
+    button{
+      background: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+
+      width:48%;
+      float:left;
+
+      &.start-pauze{
+        margin-right:2%;
+
+      }
+
+      &.stop{
+        margin-left:2%;
+      }
+
+      &[disabled]{
+        border: 1px solid rgba(0, 0, 0, 0.24);;
+        color: rgba(0, 0, 0, 0.24);
+      }
+
+    }
+  }
+
+}
+
+
