@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
 import { RouterModule} from '@angular/router';
 
 import { routing } from './app.routes';
@@ -14,6 +14,7 @@ import { HeaderComponent } from './header/header.component';
 
 import { AuthService } from './auth/auth.service';
 import {LoggedInGuard} from "./guards/logged-in-guard.service";
+import {httpFactory} from "./restclient/http.factory";
 
 
 @NgModule({
@@ -35,7 +36,12 @@ import {LoggedInGuard} from "./guards/logged-in-guard.service";
   ],
   providers: [
     AuthService,
-    LoggedInGuard
+    LoggedInGuard,
+    {
+      provide: Http,
+      useFactory: httpFactory,
+      deps: [XHRBackend, RequestOptions]
+    }
   ],
   bootstrap: [AppComponent]
 })

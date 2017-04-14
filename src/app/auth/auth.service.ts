@@ -24,21 +24,21 @@ export class AuthService {
 
       // Post!
       return this.http.post(
-            'http://localhost:61251/tuinbouw/rest/login',
+            '/login',
             data,
             { headers: headers })
             .map((response: Response) => {
-                localStorage.setItem('token', response.text())
+                sessionStorage.setItem('token', response.text())
             }
        );
   }
 
   logout() {
-      localStorage.removeItem('token');
+      sessionStorage.removeItem('token');
   }
 
   isLoggedIn(): boolean{
-      let token = localStorage.getItem('token');
+      let token = sessionStorage.getItem('token');
       if(token){
           return true;
       }
