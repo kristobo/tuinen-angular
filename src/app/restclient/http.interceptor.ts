@@ -42,13 +42,10 @@ export class InterceptedHttp extends Http {
         }
         let token = sessionStorage.getItem('token');
 
-        console.log(path);
-
         if(token && path != "/login" ){
             options.headers.append('Authorization', token);
             options.headers.append('Content-Type', 'application/json');
         }
-
 
         return options;
     }
