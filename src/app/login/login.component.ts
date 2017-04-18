@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form): void {
     this.loading = true;
-    this.message = "git a";
+    this.message = "";
     this.authService.authenticate(form.value).subscribe(
         data => {
           this.router.navigate(["/tasks"]);

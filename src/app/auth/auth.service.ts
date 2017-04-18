@@ -30,7 +30,7 @@ export class AuthService {
             .map((response: Response) => {
                 sessionStorage.setItem('token', response.text())
             }
-       );
+      );
   }
 
   logout() {

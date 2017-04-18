@@ -64,6 +64,7 @@ input {
 
 
 /* Header*/
+
 nav {
   background-color: rgba(0, 0, 0, 0.5);
   box-shadow: none;
@@ -79,8 +80,9 @@ nav {
     }
   }
 
-  .button-collapse{
+  a.button-collapse{
     float:right;
+    display:block;
   }
 
 }

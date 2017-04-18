@@ -11,7 +11,12 @@
 
 </head>
 <body>
-  <app-root>Loading...</app-root>
+  <app-root>
+    <div *ngIf="loading" class="spinner">
+    <div class="d1"></div>
+    <div class="d2"></div>
+  </div>
+  </app-root>
 
 </body>
 

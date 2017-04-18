@@ -39,6 +39,7 @@ export class TaskListComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 
 }
