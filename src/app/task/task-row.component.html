@@ -1,9 +1,18 @@
-<a class="task-item">
+<a [routerLink]="['/task', task.id]" class="task-item">
    <div class="icon">
       <i class="fa fa-arrow-right fa-lg"></i>
    </div>
    <div class="content">
-      <div class="title">{{ task }}</div>
-      <div class="category">{{ task.category }}</div>
+      <div class="title">{{ task.title }}</div>
+
+      <div [ngSwitch]="task.customer.bedrijfnaam">
+         <div *ngSwitchCase="null">
+            <div class="category">klant: {{ task.customer.voornaam }} {{ task.customer.naam }}</div>
+         </div>
+         <div *ngSwitchDefault>
+            <div class="category">klant: {{ task.customer.bedrijfnaam }}</div>
+         </div>
+      </div>
+
    </div>
 </a>

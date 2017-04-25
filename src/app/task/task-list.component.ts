@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Task } from './task.model';
-import { TaskService } from './../httpServices/task.service';
+import { Task } from '../model/task.model';
+import { TaskService } from './../services/task.service';
 
 @Component({
   selector: 'app-tasklist',
@@ -19,11 +19,11 @@ export class TaskListComponent implements OnInit {
   }
 
   private getAllTasks(){
+
     this.taskService.getAllTasks()
         .subscribe(
             tasks => this.tasks = tasks
         );
-
   }
 
 }

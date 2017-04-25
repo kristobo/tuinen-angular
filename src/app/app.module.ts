@@ -13,7 +13,7 @@ import { TaskDetailComponent } from './task/task-detail.component';
 import { HeaderComponent } from './header/header.component';
 
 import { AuthService } from './auth/auth.service';
-import {LoggedInGuard} from "./guards/logged-in-guard.service";
+import {LoggedInGuard} from "./auth/logged-in-guard.service";
 import {httpFactory} from "./http/http.factory";
 
 

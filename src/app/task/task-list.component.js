@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require('@angular/core');
-var task_model_1 = require('./task.model');
+var task_model_1 = require('./../model/task.model.ts');
 var TaskListComponent = (function () {
     function TaskListComponent() {
         this.tasks = [

@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 declare var jQuery:any;
 
 @Component({
@@ -7,9 +8,15 @@ declare var jQuery:any;
 })
 export class TaskDetailComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+
+      this.activatedRoute.params.subscribe((params: Params) => {
+          let taskId = params['id'];
+
+          console.log(taskId);
+      });
 
   }
 
