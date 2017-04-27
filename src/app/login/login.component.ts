@@ -34,7 +34,11 @@ export class LoginComponent implements OnInit {
           this.router.navigate(["/tasks"]);
         },
         error => {
-          this.message = "Verkeerde gebruikersnaam of paswoord.";
+
+          this.message = "Error";
+          if(error._body){
+            this.message = error._body;
+          }
           this.loading = false;
         });
   }

@@ -22,7 +22,9 @@ export class TaskListComponent implements OnInit {
 
     this.taskService.getAllTasks()
         .subscribe(
-            tasks => this.tasks = tasks
+            tasks =>{
+              this.tasks = tasks
+            }
         );
   }
 

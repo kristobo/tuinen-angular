@@ -33,6 +33,7 @@
       background: transparent;
       border: 1px solid #fff;
       color: #fff;
+      padding:8px;
 
       width:48%;
       float:left;
@@ -49,6 +50,14 @@
       &[disabled]{
         border: 1px solid rgba(0, 0, 0, 0.24);;
         color: rgba(0, 0, 0, 0.24);
+      }
+
+      > span{
+        vertical-align:middle;
+      }
+
+      > .material-icons{
+        vertical-align: middle;
       }
 
     }
