@@ -21,10 +21,19 @@
 
     .title{}
 
-    .category{
+    .category,
+    .status{
       font-size:12px;
       font-weight:300;
+
+      .complete{
+        color: $btn_green;
+        font-size: 16px;
+        margin-left: 6px;
+      }
     }
+
+
   }
 }
 

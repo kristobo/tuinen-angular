@@ -52,15 +52,41 @@
         color: rgba(0, 0, 0, 0.24);
       }
 
-      > span{
+      span{
         vertical-align:middle;
       }
 
-      > .material-icons{
+      .material-icons{
         vertical-align: middle;
       }
 
     }
+  }
+
+  .range-field{
+    margin-top: 45px;
+    margin-bottom: 30px;
+
+    input[type=range]{
+      border: none;
+    }
+
+    input[type=range]::-webkit-slider-thumb{
+      background-color: $title_bg;
+    }
+    input[type=range]::-moz-range-thumb{
+      background-color: $title_bg;
+    }
+    input[type=range]::-ms-thumb{
+      background-color: $title_bg;
+    }
+
+    /***** These are to edit the thumb and the text inside the thumb *****/
+    input[type=range] + .thumb {
+      background-color: $title_bg;
+    }
+    
+
   }
 
 }

@@ -4,11 +4,17 @@
         <div class="col s12 m6 offset-m3">
             <h2>Overzicht taken</h2>
 
-            <app-task
-                    *ngFor="let task of tasks"
-                    [task]="task">
-            </app-task>
+            <div [hidden]="!loading" class="spinner">
+                <div class="d1"></div>
+                <div class="d2"></div>
+            </div>
 
+            <div [hidden]="loading">
+                <app-task
+                        *ngFor="let task of tasks"
+                        [task]="task">
+                </app-task>
+            </div>
         </div>
     </div>
 

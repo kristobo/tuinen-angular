@@ -2,6 +2,9 @@
 $green: #30B996;
 $blue: #0081ae;
 $red: #EF402C;
+
+$btn_green:#00C091;
+$title_bg: rgba(0, 0, 0, 0.64);
 /* Variables */
 
 
@@ -70,8 +73,10 @@ nav {
   box-shadow: none;
 
   .logo {
+    box-sizing: border-box;
     float:left;
-    margin: 10px 18px 0;
+    height: 56px;
+    padding: 10px 18px 0;
     @include opacity(0.7);
 
     img{
@@ -91,12 +96,12 @@ nav {
 .table{
   .table-header{
     padding: 8px 16px;
-    background-color: rgba(0, 0, 0, 0.64);
+    background-color: $title_bg;
   }
   .table-body{
     background-color: rgba(255, 255, 255, 0.9);
     padding: 16px;
-    color: rgba(0, 0, 0, 0.64);
+    color: $title_bg;
     font-size: 1em;
     font-weight: 400;
   }

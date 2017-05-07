@@ -6,16 +6,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require('@angular/core');
-var task_model_1 = require('./../model/task.model.ts');
 var TaskListComponent = (function () {
-    function TaskListComponent() {
-        this.tasks = [
-            new task_model_1.Task(3, 'Kristof', 'cat1'),
-            new task_model_1.Task(2, 'Jerome', 'cat1'),
-            new task_model_1.Task(1, 'Guillaume', 'cat1'),
-        ];
+    function TaskListComponent(dataService) {
+        this.dataService = dataService;
     }
     TaskListComponent.prototype.ngOnInit = function () {
+        this.getAllTasks();
+    };
+    TaskListComponent.prototype.getAllTasks = function () {
+        var _this = this;
+        this.dataService.getAllTasks()
+            .subscribe(function (tasks) {
+            _this.tasks = tasks;
+        });
     };
     TaskListComponent = __decorate([
         core_1.Component({

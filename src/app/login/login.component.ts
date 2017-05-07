@@ -12,7 +12,7 @@ import {AuthService} from "../auth/auth.service";
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading: boolean;
-  message: String;
+  error: String;
 
   constructor(
       private fb: FormBuilder,
@@ -28,16 +28,15 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form): void {
     this.loading = true;
-    this.message = "";
+    this.error = "";
     this.authService.authenticate(form.value).subscribe(
         data => {
           this.router.navigate(["/tasks"]);
         },
         error => {
-
-          this.message = "Error";
-          if(error._body){
-            this.message = error._body;
+          this.error = "Connection error";
+          if(error._body && typeof error._body ==="string"){
+            this.error = error._body;
           }
           this.loading = false;
         });

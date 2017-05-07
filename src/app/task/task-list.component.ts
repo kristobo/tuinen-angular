@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../model/task.model';
-import { TaskService } from './../services/task.service';
+import { DataService} from '../services/data.service';
 
 @Component({
   selector: 'app-tasklist',
   templateUrl: 'task-list.component.html',
-  providers: [TaskService],
+  providers: [DataService],
 })
 export class TaskListComponent implements OnInit {
   tasks: Task[];
+  loading: boolean;
 
-  constructor(private taskService: TaskService) {
+  constructor(private dataService: DataService) {
 
   }
 
@@ -18,13 +19,14 @@ export class TaskListComponent implements OnInit {
     this.getAllTasks();
   }
 
-  private getAllTasks(){
-
-    this.taskService.getAllTasks()
+  getAllTasks(){
+    this.loading = true;
+    this.dataService.getAllTasks()
         .subscribe(
             tasks =>{
-              this.tasks = tasks
-            }
+              this.loading = false;
+              this.tasks = tasks;
+            },
         );
   }
 

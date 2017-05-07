@@ -3,64 +3,95 @@
 
   <div class="container">
     <div class="col s12 m6 offset-m3">
-      <div class="row detail-header">
-        <div class="col s10">
-          <div class="intro">
-            <div class="name">
+
+     <div [hidden]="!loading" class="spinner">
+        <div class="d1"></div>
+        <div class="d2"></div>
+     </div>
+
+     <div [hidden]="loading">
+         <div class="row detail-header">
+             <div class="col s10">
+                 <div class="intro">
+                     <div class="name">
                 <span>
-                 Bourgeois Kristof
+
+                  <div [ngSwitch]="job?.customer?.bedrijfnaam">
+                   <div *ngSwitchCase="null">
+                      <div class="category">{{ job?.customer?.voornaam }} {{ job?.customer?.naam }}</div>
+                   </div>
+                   <div *ngSwitchDefault>
+                      <div class="category">{{ job?.customer?.bedrijfnaam }}</div>
+                   </div>
+                </div>
+
                 </span>
-            </div>
-            <div class="adress">
+                     </div>
+                     <div class="adress">
                 <span>
-                  Molenstraat 39 <br>
-                  Kortrijk
+                      {{ job?.customer?.address?.straat }}
+                      {{ job?.customer?.address?.nummer }}
+                       <span *ngIf="job?.customer?.address?.bus">bus </span>{{ job?.customer?.address?.bus }}
+                  <br>
+                      {{ job?.customer?.address?.postcode }}
+                      {{ job?.customer?.addres?.plaats }}
                 </span>
-            </div>
-          </div>
-        </div>
+                     </div>
+                 </div>
+             </div>
 
-        <div class="col s2">
-          <button class="btn-flat quick-list-btn"
-                  data-activates='dropdown-menu'>
-            <i class="material-icons">more_vert</i>
+             <div class="col s2">
+                 <button class="btn-flat quick-list-btn"
+                         data-activates='dropdown-menu'>
+                     <i class="material-icons">more_vert</i>
 
-            <ul id='dropdown-menu' class='dropdown-content'>
-              <li><a href="#!">Toon adres op kaart</a></li>
-            </ul>
+                     <ul id='dropdown-menu' class='dropdown-content'>
+                         <li><a [routerLink]="['/task/map']">Toon adres op kaart</a></li>
+                     </ul>
 
-          </button>
-        </div>
+                 </button>
+             </div>
 
-      </div>
+         </div>
 
+         <div class="row actions">
 
-      <div class="row actions">
-        <button class="start-pauze"><span>Start</span> <i class="material-icons">play_arrow</i></button>
-        <!--<button class="">Pauze<i class="material-icons">pause</i></button>-->
-        <button disabled class="stop"><span>Stop</span> <i class="material-icons">stop</i></button>
-      </div>
+             <button class="start-pauze">
+                 <div class="start" *ngIf="paused" (click)="PausePlay()"><span>Start</span><i class="material-icons">play_arrow</i></div>
+                 <div class="pauze" *ngIf="!paused" (click)="PausePlay()"><span>Pauze</span><i class="material-icons">pause</i></div>
+             </button>
 
+             <button [disabled]="!paused" class="stop"><span>Finish</span> <i class="material-icons">stop</i></button>
+         </div>
 
-      <div class="row detail-body">
-        <div class="table">
-          <div class="table-header">
-            Omschrijving
-          </div>
+         <div class="row range-field">
+             <div class="col s12">Vooruitgang: {{ job?.task?.vooruitgangPercentage  }}%</div>
+             <input type="range"
+                    id="status-range"
+                    #statusRange
+                    min="0" max="100"
+                    step="5"
+                    (change)="updateStatus(statusRange.value)"
+                    value="{{ job?.task?.vooruitgangPercentage || 0}}"/>
+         </div>
 
-          <div class="table-body">
-            <p class="title">title</p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-          </div>
-        </div>
+         <div class="row detail-body">
+             <div class="table">
+                 <div class="table-header">
+                     {{ job?.task?.taakNaam }}
+                 </div>
 
-      </div>
+                 <div class="table-body">
+                     <p class="title"></p>
+                     <p>
+                         {{ job?.task?.opmerking }}
+                     </p>
+                 </div>
+             </div>
 
+         </div>
 
-
-
+     </div>
 
     </div>
   </div>

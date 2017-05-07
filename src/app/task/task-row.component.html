@@ -3,7 +3,7 @@
       <i class="fa fa-arrow-right fa-lg"></i>
    </div>
    <div class="content">
-      <div class="title">{{ task.title }}</div>
+      <div class="title">{{ task.taakNaam }}</div>
 
       <div [ngSwitch]="task.customer.bedrijfnaam">
          <div *ngSwitchCase="null">
@@ -13,6 +13,8 @@
             <div class="category">klant: {{ task.customer.bedrijfnaam }}</div>
          </div>
       </div>
+
+      <div class="status"><span>Status: {{task.vooruitgangPercentage}}%</span><i *ngIf="task.vooruitgangPercentage==100" class="fa fa-check complete" aria-hidden="true"></i></div>
 
    </div>
 </a>
