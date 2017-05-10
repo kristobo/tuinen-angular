@@ -16,12 +16,12 @@
                      <div class="name">
                 <span>
 
-                  <div [ngSwitch]="job?.customer?.bedrijfnaam">
+                <div [ngSwitch]="job?.customer?.bedrijfnaam">
                    <div *ngSwitchCase="null">
-                      <div class="category">{{ job?.customer?.voornaam }} {{ job?.customer?.naam }}</div>
+                      <div class="category">{{ job?.customer?.voornaam }} {{ job?.customer?.naam || "loading..." }}</div>
                    </div>
                    <div *ngSwitchDefault>
-                      <div class="category">{{ job?.customer?.bedrijfnaam }}</div>
+                      <div class="category">{{ job?.customer?.bedrijfnaam || "loading..."}}</div>
                    </div>
                 </div>
 
@@ -30,7 +30,7 @@
                      <div class="adress">
                 <span>
                       {{ job?.customer?.address?.straat }}
-                      {{ job?.customer?.address?.nummer }}
+                      {{ job?.customer?.address?.nummer || "loading..." }}
                        <span *ngIf="job?.customer?.address?.bus">bus </span>{{ job?.customer?.address?.bus }}
                   <br>
                       {{ job?.customer?.address?.postcode }}
@@ -47,6 +47,7 @@
 
                      <ul id='dropdown-menu' class='dropdown-content'>
                          <li><a [routerLink]="['/task/map']">Toon adres op kaart</a></li>
+                         <li><a [routerLink]="['/task/map']">Voeg materiaal toe</a></li>
                      </ul>
 
                  </button>
@@ -56,12 +57,18 @@
 
          <div class="row actions">
 
-             <button class="start-pauze">
-                 <div class="start" *ngIf="paused" (click)="PausePlay()"><span>Start</span><i class="material-icons">play_arrow</i></div>
-                 <div class="pauze" *ngIf="!paused" (click)="PausePlay()"><span>Pauze</span><i class="material-icons">pause</i></div>
+             <button class="start-pauze" [disabled]="job?.task?.vooruitgangPercentage == 100">
+                 <div class="start"
+                      *ngIf="paused"
+                      (click)="PausePlay('play')"><span>Start</span><i class="material-icons">play_arrow</i></div>
+
+                 <div class="pauze"
+                      *ngIf="!paused"
+                      (click)="PausePlay('pauze')"><span>Pauze</span><i class="material-icons">pause</i></div>
+
              </button>
 
-             <button [disabled]="!paused" class="stop"><span>Finish</span> <i class="material-icons">stop</i></button>
+             <button (click)="Stop()" class="stop"><span>Finish</span> <i class="material-icons">stop</i></button>
          </div>
 
          <div class="row range-field">

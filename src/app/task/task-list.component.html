@@ -9,6 +9,8 @@
                 <div class="d2"></div>
             </div>
 
+            <div *ngIf="error" class="error">{{error}}</div>
+
             <div [hidden]="loading">
                 <app-task
                         *ngFor="let task of tasks"

@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(["/tasks"]);
         },
         error => {
+          console.log(error);
           this.error = "Connection error";
           if(error._body && typeof error._body ==="string"){
             this.error = error._body;

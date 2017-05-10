@@ -16,14 +16,16 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private dataService   : DataService,
-              ) { }
+              ) {
+      this.getJobInfo();
+
+  }
 
   ngOnInit() {
-     this.getJobInfo();
+
   }
 
   ngAfterViewInit() {
-
       this.initMaterializeJs();
   }
 
@@ -36,29 +38,83 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
                   this.loading = false;
                   this.job = job;
                   sessionStorage.setItem('job', JSON.stringify(job));
+
+                  // Get rest of the info
+                  this.getCustomerInfo(this.job.klantId);
+                  console.log(job);
               },
+              error => {
+                  console.log(error);
+              }
           );
 
       });
 
   }
 
-  PausePlay() {
+  getCustomerInfo(id: number){
 
-        if(this.paused) {
-            this.paused = false;
+    this.dataService.getCustomer(id)
+        .subscribe(
+            customer =>{
+                this.job.customer = customer;
+                this.getAddressInfo(this.job.klantAdresId);
+            },
+            error => {
+                console.log(error);
+            }
 
-        } else {
-            this.paused = true;
+        );
+  }
+
+  getAddressInfo(id: number){
+
+      this.dataService.getAddress(id)
+          .subscribe(
+              address =>{
+                  this.job.customer.address = address;
+                  sessionStorage.setItem('job', JSON.stringify(this.job));
+              },
+              error => {
+                  console.log(error);
+              }
+
+          );
+  }
+
+  PausePlay(status) {
+        // Prevent recording when task is finished
+        if(this.job.task.vooruitgangPercentage !=100){
+
+            if(status == "play") {
+                this.paused = false;
+
+            } else {
+                this.paused = true;
+
+            }
 
         }
 
   }
 
+  Stop() {
+        this.updateStatus(100);
+  }
+
   updateStatus(value){
+      if(value == 100){
+          this.paused = true;
+      }
       this.job.task.vooruitgangPercentage = value;
-
-
+      this.dataService.updateStatus(JSON.stringify(this.job)).subscribe(
+          data => {
+              console.log(data);
+          },
+          error => {
+              console.log(error);
+          }
+      );
   }
 
   initMaterializeJs(){

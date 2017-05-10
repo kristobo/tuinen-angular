@@ -1,0 +1,8 @@
+<div [ngSwitch]="customer?.bedrijfnaam">
+  <div *ngSwitchCase="null">
+    <div class="category">klant: {{ customer?.voornaam }} {{ customer?.naam || "loading..." }}</div>
+  </div>
+  <div *ngSwitchDefault>
+    <div class="category">klant: {{ customer?.bedrijfnaam || "loading..." }}</div>
+  </div>
+</div>

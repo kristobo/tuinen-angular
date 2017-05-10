@@ -10,6 +10,7 @@ import { DataService} from '../services/data.service';
 export class TaskListComponent implements OnInit {
   tasks: Task[];
   loading: boolean;
+  error: String;
 
   constructor(private dataService: DataService) {
 
@@ -27,6 +28,10 @@ export class TaskListComponent implements OnInit {
               this.loading = false;
               this.tasks = tasks;
             },
+            error => {
+                this.error = error;
+                this.loading = false;
+            }
         );
   }
 

@@ -16,6 +16,7 @@ import { AuthService } from './auth/auth.service';
 import { LoggedInGuard } from "./auth/logged-in-guard.service";
 import { httpFactory } from "./http/http.factory";
 import { MapComponent } from './map/map.component';
+import { TaskCustomerComponent } from './task/task-customer.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { MapComponent } from './map/map.component';
     TaskDetailComponent,
     HeaderComponent,
     MapComponent,
+    TaskCustomerComponent,
   ],
   imports: [
     BrowserModule,

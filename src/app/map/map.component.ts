@@ -18,7 +18,6 @@ export class MapComponent implements OnInit {
         "key=AIzaSyC7r-xZGitdgfvMXOfB2aDmrpzGlIt4pH0" +
         "&q="+job.customer.address.straat+"+"+job.customer.address.nummer+"," +
         ""+job.customer.address.postcode+"+"+job.customer.address.plaats+"");
-     console.log(this.mapUrl);
   }
 
   ngOnInit() {

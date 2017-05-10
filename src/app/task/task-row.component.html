@@ -5,14 +5,9 @@
    <div class="content">
       <div class="title">{{ task.taakNaam }}</div>
 
-      <div [ngSwitch]="task.customer.bedrijfnaam">
-         <div *ngSwitchCase="null">
-            <div class="category">klant: {{ task.customer.voornaam }} {{ task.customer.naam }}</div>
-         </div>
-         <div *ngSwitchDefault>
-            <div class="category">klant: {{ task.customer.bedrijfnaam }}</div>
-         </div>
-      </div>
+      <app-task-customer
+              [id]="task.klantId">
+      </app-task-customer>
 
       <div class="status"><span>Status: {{task.vooruitgangPercentage}}%</span><i *ngIf="task.vooruitgangPercentage==100" class="fa fa-check complete" aria-hidden="true"></i></div>
 

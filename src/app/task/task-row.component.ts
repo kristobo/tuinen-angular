@@ -3,7 +3,7 @@ import {Task} from "../model/task.model";
 
 @Component({
   selector: 'app-task',
-  templateUrl: 'task-row.component.html'
+  templateUrl: 'task-row.component.html',
 })
 export class TaskRowComponent implements OnInit {
   @Input() task: Task;
