@@ -5,7 +5,6 @@ import { DataService} from '../services/data.service';
 @Component({
   selector: 'app-tasklist',
   templateUrl: 'task-list.component.html',
-  providers: [DataService],
 })
 export class TaskListComponent implements OnInit {
   tasks: Task[];

@@ -3,28 +3,28 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 import { Job } from '../model/job.model';
 import { Track } from '../model/track.model';
 import { DataService } from '../services/data.service';
+import {TrackingService} from "../services/tracking.service";
+import {isUndefined} from "util";
 declare var jQuery:any;
 
 @Component({
   selector: 'app-task-detail',
   templateUrl: './task-detail.component.html',
-  providers: [DataService],
 })
 export class TaskDetailComponent implements OnInit, AfterViewInit {
   job: Job;
   paused: boolean = true;
   loading: boolean;
-  startTime: number;
+  disActions: String;
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private dataService   : DataService,
+  constructor(private activatedRoute : ActivatedRoute,
+              private dataService    : DataService,
+              private trackingService: TrackingService
               ) {
-      this.getJobInfo();
-
-  }
+     }
 
   ngOnInit() {
-
+      this.getJobInfo();
   }
 
   ngAfterViewInit() {
@@ -43,7 +43,9 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
                   // Get rest of the info
                   this.getCustomerInfo(this.job.klantId);
-                  console.log(job);
+
+                  // Init actions buttons
+                  this.initActions();
               },
               error => {
                   console.log(error);
@@ -52,6 +54,18 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
       });
 
+  }
+
+  initActions(){
+      if(this.trackingService.isTrackRunning()){
+          if(this.trackingService.isTaskActive(this.job.task.id)){
+              // If track is running on this job, set correct buttons state
+              this.paused = false;
+          }else{
+              // If track is running on an other job, then show a message.
+              this.disActions = "Een andere taak is actief";
+          }
+      }
   }
 
   getCustomerInfo(id: number){
@@ -92,30 +106,23 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
         if(status == "play") {
             this.paused = false;
-            this.startTime = time;
-            console.log("play", time);
+            this.trackingService.start(this.job.id, this.job.task.id, time);
 
-        } else {
+           } else {
             this.paused = true;
-            console.log("pauze", time);
-            this.trackPeriod(this.startTime,time);
+            this.trackingService.stop(time);
+
         }
     }
   }
 
   Stop() {
       if(!this.paused){
-          let endTime = new Date().getTime();
-          this.trackPeriod(this.startTime, endTime);
+          let time = new Date().getTime();
+          this.trackingService.stop(time);
       }
       this.updateStatus(100);
   }
-
-  trackPeriod(startTime, endTime){
-      let track = new Track(startTime, endTime, this.job.task.opdrachtId, this.job.task.id);
-      console.log(track);
-  }
-
 
   updateStatus(value){
       if(value == 100){

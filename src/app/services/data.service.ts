@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Task } from '../model/task.model';
+import { Track } from '../model/track.model';
 import { Job } from '../model/job.model';
 import { Customer } from '../model/customer.model';
 import { Address } from '../model/address.model';
@@ -45,8 +46,13 @@ export class DataService {
     }
 
     public updateStatus(job: any){
-        console.log(job);
         return this.http.post('/task/status', job)
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
+
+    public trackTaskTime(track: Track){
+        return this.http.post('/task/track', track)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }

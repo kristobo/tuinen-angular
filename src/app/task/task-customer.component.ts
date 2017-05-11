@@ -5,7 +5,6 @@ import { DataService} from '../services/data.service';
 @Component({
   selector: 'app-task-customer',
   templateUrl: 'task-customer.component.html',
-  providers: [DataService],
 })
 export class TaskCustomerComponent implements OnInit {
   @Input() id: number;

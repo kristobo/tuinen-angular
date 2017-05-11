@@ -12,6 +12,8 @@
   .icon{
     width: 32px;
     padding: 8px 0px;
+    height:40px;
+    line-height:40px;
   }
 
   .content{
@@ -26,10 +28,12 @@
       font-size:12px;
       font-weight:300;
 
-      .complete{
-        color: $btn_green;
+      .fa{
         font-size: 16px;
         margin-left: 6px;
+        &.fa-check{
+          color: $btn_green;
+        }
       }
     }
 

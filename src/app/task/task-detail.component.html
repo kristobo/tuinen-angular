@@ -55,8 +55,10 @@
 
          </div>
 
-         <div class="row actions">
 
+         <div *ngIf="disActions" class="error">{{disActions}}</div>
+
+         <div *ngIf="!disActions" class="row actions">
              <button class="start-pauze" [disabled]="job?.task?.vooruitgangPercentage == 100">
                  <div class="start"
                       *ngIf="paused"

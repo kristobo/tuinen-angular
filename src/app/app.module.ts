@@ -17,6 +17,8 @@ import { LoggedInGuard } from "./auth/logged-in-guard.service";
 import { httpFactory } from "./http/http.factory";
 import { MapComponent } from './map/map.component';
 import { TaskCustomerComponent } from './task/task-customer.component';
+import {TrackingService} from "./services/tracking.service";
+import {DataService} from "./services/data.service";
 
 
 @NgModule({
@@ -41,6 +43,8 @@ import { TaskCustomerComponent } from './task/task-customer.component';
   providers: [
     AuthService,
     LoggedInGuard,
+    TrackingService,
+    DataService,
     {
       provide: Http,
       useFactory: httpFactory,
