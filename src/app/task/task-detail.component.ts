@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { Job } from '../model/job.model';
+import { Track } from '../model/track.model';
 import { DataService } from '../services/data.service';
 declare var jQuery:any;
 
@@ -13,6 +14,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
   job: Job;
   paused: boolean = true;
   loading: boolean;
+  startTime: number;
 
   constructor(private activatedRoute: ActivatedRoute,
               private dataService   : DataService,
@@ -83,24 +85,37 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
   }
 
   PausePlay(status) {
-        // Prevent recording when task is finished
-        if(this.job.task.vooruitgangPercentage !=100){
+    // Prevent recording when task is finished
+    let time = new Date().getTime();
 
-            if(status == "play") {
-                this.paused = false;
+    if(this.job.task.vooruitgangPercentage !=100){
 
-            } else {
-                this.paused = true;
+        if(status == "play") {
+            this.paused = false;
+            this.startTime = time;
+            console.log("play", time);
 
-            }
-
+        } else {
+            this.paused = true;
+            console.log("pauze", time);
+            this.trackPeriod(this.startTime,time);
         }
-
+    }
   }
 
   Stop() {
-        this.updateStatus(100);
+      if(!this.paused){
+          let endTime = new Date().getTime();
+          this.trackPeriod(this.startTime, endTime);
+      }
+      this.updateStatus(100);
   }
+
+  trackPeriod(startTime, endTime){
+      let track = new Track(startTime, endTime, this.job.task.opdrachtId, this.job.task.id);
+      console.log(track);
+  }
+
 
   updateStatus(value){
       if(value == 100){
