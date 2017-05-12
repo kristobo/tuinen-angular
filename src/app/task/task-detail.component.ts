@@ -100,7 +100,8 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
   PausePlay(status) {
     // Prevent recording when task is finished
-    let time = new Date().getTime();
+    // /1000 because getTime is in milliseconds
+    let time = new Date().getTime()/1000;
 
     if(this.job.task.vooruitgangPercentage !=100){
 
