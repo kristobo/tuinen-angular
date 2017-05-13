@@ -10,12 +10,11 @@ export class AuthService {
 
   authenticate(formData: any) {
 
-
-      // Set correct headers
+      // Set correct headers.
       let headers = new Headers();
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-      // Use default form format to send
+      // Use default form format to send.
       let params = new URLSearchParams();
       params.append('username', formData.username);
       params.append('password', formData.password);

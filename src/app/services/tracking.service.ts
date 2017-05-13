@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Track } from "../model/track.model";
 import { DataService } from "../services/data.service";
-import {isUndefined} from "util";
+import { isUndefined } from "util";
 
 /**
  * This Class holds an track object with the running tracking data.
@@ -12,12 +12,15 @@ export class TrackingService {
 
     constructor(private dataService: DataService) { }
 
+    // Start tracking
     public start(opdrachtId: number, taskId: number, startTime: number ){
         this.track = new Track(opdrachtId, taskId, startTime, null);
+        localStorage.setItem(taskId.toString(), "started-once");
         console.log("track-start", this.track);
 
     }
 
+    // Stop tracking
     public stop(endTime: number ){
         this.track.endTime = endTime;
         this.dataService.trackTaskTime(this.track).subscribe(
@@ -32,6 +35,7 @@ export class TrackingService {
         console.log("track-stop", this.track);
     }
 
+    // Check if task is active
     public isTaskActive(taskId: number){
        let active: boolean= false;
        if(!isUndefined(this.track) && this.track != null){
@@ -42,6 +46,7 @@ export class TrackingService {
        return active;
     }
 
+    // Check if any task is running
     public isTrackRunning(){
         let running: boolean = false;
         if(!isUndefined(this.track) && this.track != null){

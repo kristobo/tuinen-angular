@@ -16,6 +16,7 @@ export class TaskCustomerComponent implements OnInit {
       this.getCustomerInfo(this.id);
   }
 
+  // Get customer info by customerId.
   getCustomerInfo(id: number){
 
     this.dataService.getCustomer(id)

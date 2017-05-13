@@ -5,6 +5,7 @@ import { DataService} from '../services/data.service';
 @Component({
   selector: 'app-tasklist',
   templateUrl: 'task-list.component.html',
+
 })
 export class TaskListComponent implements OnInit {
   tasks: Task[];
@@ -19,6 +20,7 @@ export class TaskListComponent implements OnInit {
     this.getAllTasks();
   }
 
+  // Get all tasks for logged in user.
   getAllTasks(){
     this.loading = true;
     this.dataService.getAllTasks()

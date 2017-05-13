@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
 
   }
 
+  // Handle login credentials.
   onSubmit(form): void {
     this.loading = true;
     this.error = "";

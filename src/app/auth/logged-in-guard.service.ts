@@ -10,6 +10,7 @@ export class LoggedInGuard implements CanActivate {
 
   }
 
+  // Prevent showing pages to not logged in users.
   canActivate(): boolean {
     if(this.authService.isLoggedIn()){
       return true;

@@ -1,10 +1,10 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import {Router, ActivatedRoute, Params} from '@angular/router';
+import { ActivatedRoute, Params} from '@angular/router';
 import { Job } from '../model/job.model';
-import { Track } from '../model/track.model';
 import { DataService } from '../services/data.service';
-import {TrackingService} from "../services/tracking.service";
-import {isUndefined} from "util";
+import { TrackingService } from "../services/tracking.service";
+import { TaskStatus } from "./enum.status";
+
 declare var jQuery:any;
 
 @Component({
@@ -31,6 +31,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
       this.initMaterializeJs();
   }
 
+  // Get current job info and store in sessionStorage.
   getJobInfo(){
      this.loading = true;
       this.activatedRoute.params.subscribe((params: Params) => {
@@ -41,10 +42,10 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
                   this.job = job;
                   sessionStorage.setItem('job', JSON.stringify(job));
 
-                  // Get rest of the info
+                  // Get rest of the info.
                   this.getCustomerInfo(this.job.klantId);
 
-                  // Init actions buttons
+                  // Init actions buttons.
                   this.initActions();
               },
               error => {
@@ -56,10 +57,11 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
   }
 
+  // Init correct layout.
   initActions(){
       if(this.trackingService.isTrackRunning()){
           if(this.trackingService.isTaskActive(this.job.task.id)){
-              // If track is running on this job, set correct buttons state
+              // If track is running on this job, set correct buttons state.
               this.paused = false;
           }else{
               // If track is running on an other job, then show a message.
@@ -68,6 +70,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
       }
   }
 
+  // Get Customer info for currect job.
   getCustomerInfo(id: number){
 
     this.dataService.getCustomer(id)
@@ -83,6 +86,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
         );
   }
 
+  // Get Address info for current job.
   getAddressInfo(id: number){
 
       this.dataService.getAddress(id)
@@ -98,39 +102,53 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
           );
   }
 
-  PausePlay(status) {
-    // Prevent recording when task is finished
-    // /1000 because getTime is in milliseconds
+  ActionButtun(status) {
+    // Prevent recording when task is finished.
+    // /1000 because getTime is in milliseconds.
     let time = new Date().getTime()/1000;
 
     if(this.job.task.vooruitgangPercentage !=100){
 
+        // ButtenHandler.
         if(status == "play") {
             this.paused = false;
+            let status = TaskStatus.Gestart;
+
+            if(this.startedOne()){
+                status = TaskStatus.Hervat;
+            }
+            this.updateStatus(status);
             this.trackingService.start(this.job.id, this.job.task.id, time);
 
-           } else {
+        }
+        else if(status == "stop"){
+            this.updateProgress(100);
+        }
+        else if(status == "pauze") {
             this.paused = true;
+            this.updateStatus(TaskStatus.Gepauzeerd);
             this.trackingService.stop(time);
-
         }
     }
   }
 
-  Stop() {
-      if(!this.paused){
-          let time = new Date().getTime();
-          this.trackingService.stop(time);
-      }
-      this.updateStatus(100);
-  }
+  // Update task progress.
+  updateProgress(value){
 
-  updateStatus(value){
       if(value == 100){
           this.paused = true;
+          this.updateStatus(TaskStatus.Afgewerkt);
+
+          if(this.trackingService.isTrackRunning() &&
+             this.trackingService.isTaskActive(this.job.task.id)){
+              let time = new Date().getTime()/1000;
+              this.trackingService.stop(time);
+          }
+
       }
+
       this.job.task.vooruitgangPercentage = value;
-      this.dataService.updateStatus(JSON.stringify(this.job)).subscribe(
+      this.dataService.updateProgress(JSON.stringify(this.job)).subscribe(
           data => {
               console.log(data);
           },
@@ -140,8 +158,39 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
       );
   }
 
+  // Set correct task status.
+  updateStatus(statusId: number){
+      this.job.task.statusId = statusId;
+      this.dataService.updateStatus(JSON.stringify(this.job)).subscribe(
+          data => {
+              console.log(data);
+          },
+          error => {
+              console.log(error);
+          }
+      );
+
+  }
+
+  // Not used because original value gets overwritten.
+  setCoordinates(){
+      navigator.geolocation.getCurrentPosition(function(location) {
+          this.job.long = location.coords.longitude;
+          this.job.lat = location.coords.latitude;
+        });
+  }
+
+  // Check if started one to set correct status.
+  startedOne(){
+      let started = localStorage.getItem(this.job.task.id.toString());
+      if(started){
+          return true;
+      }
+      return false;
+  }
+
   initMaterializeJs(){
-      // Init materializecss dropdown menu
+      // Init materializecss dropdown menu.
       jQuery('.quick-list-btn').dropdown({
               inDuration: 300,
               outDuration: 225,

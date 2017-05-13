@@ -62,15 +62,15 @@
              <button class="start-pauze" [disabled]="job?.task?.vooruitgangPercentage == 100">
                  <div class="start"
                       *ngIf="paused"
-                      (click)="PausePlay('play')"><span>Start</span><i class="material-icons">play_arrow</i></div>
+                      (click)="ActionButtun('play')"><span>Start</span><i class="material-icons">play_arrow</i></div>
 
                  <div class="pauze"
                       *ngIf="!paused"
-                      (click)="PausePlay('pauze')"><span>Pauze</span><i class="material-icons">pause</i></div>
+                      (click)="ActionButtun('pauze')"><span>Pauze</span><i class="material-icons">pause</i></div>
 
              </button>
 
-             <button (click)="Stop()" class="stop"><span>Finish</span> <i class="material-icons">stop</i></button>
+             <button (click)="ActionButtun('stop')" class="stop"><span>Finish</span> <i class="material-icons">stop</i></button>
          </div>
 
          <div class="row range-field">
@@ -80,7 +80,7 @@
                     #statusRange
                     min="0" max="100"
                     step="5"
-                    (change)="updateStatus(statusRange.value)"
+                    (change)="updateProgress(statusRange.value)"
                     value="{{ job?.task?.vooruitgangPercentage || 0}}"/>
          </div>
 

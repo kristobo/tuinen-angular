@@ -12,24 +12,28 @@ export class DataService {
 
     constructor(private http: Http) { }
 
+    // Get all tasks.
     public getAllTasks(): Observable<Task[]>{
         return this.http.get('/task/all')
             .map((response: Response) => response.json())
             .catch(this.handleError);
     }
 
+    // Get customer info by id.
     public getCustomer(id: number): Observable<Customer>{
         return this.http.get('/customer/' + id)
             .map((response: Response) => response.json())
             .catch(this.handleError);
     }
 
+    // Get address info by id.
     public getAddress(id: number): Observable<Address>{
         return this.http.get('/address/' + id)
             .map((response: Response) => response.json())
             .catch(this.handleError);
     }
 
+    // get job info from taskId.
     public getJobByTaskId(id: number): Observable<Job>{
         return this.http.get('/task/'+ id)
             .map((res: Response) => res.json())
@@ -45,18 +49,28 @@ export class DataService {
             .catch(this.handleError);
     }
 
-    public updateStatus(job: any){
-        return this.http.post('/task/status', job)
+    // Update task progress.
+    public updateProgress(job: any){
+        return this.http.post('/task/progress', job)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
 
+    // Update task status.
+    public updateStatus(job: any){
+        return this.http.post('/status/update', job)
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
+
+    // Update tracking info.
     public trackTaskTime(track: Track){
         return this.http.post('/task/track', track)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
 
+    // Function to reports error's.
     private handleError(error: Response) {
         if(error['_body'] && typeof error['_body'] ==="string"){
             return Observable.throw(console.log(error) || error['_body']);

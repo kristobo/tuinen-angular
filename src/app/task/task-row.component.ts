@@ -16,6 +16,7 @@ export class TaskRowComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Set running state.
   isActive(){
     return this.trackingService.isTaskActive(this.task.id);
   }

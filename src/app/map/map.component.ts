@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Job } from './../model/job.model';
 import { DomSanitizer } from '@angular/platform-browser';
 
 

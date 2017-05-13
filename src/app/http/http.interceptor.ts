@@ -3,6 +3,7 @@ import { ConnectionBackend, RequestOptions, Request, RequestOptionsArgs, Respons
 import {Observable} from "rxjs/Rx";
 import {environment} from "../../environments/environment";
 
+// Override angular HTTP class to handle different environments and set correct headers
 @Injectable()
 export class InterceptedHttp extends Http {
     constructor(backend: ConnectionBackend, defaultOptions: RequestOptions) {
