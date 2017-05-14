@@ -22,6 +22,8 @@ import { DataService } from "./services/data.service";
 import { MaterialListComponent } from './material/material-list.component';
 import { MaterialRowComponent } from './material/material-row.component';
 import { MaterialAddComponent } from './material/material-add.component';
+import { MaterialListEditComponent } from './material/material-list-edit.component';
+import { MaterialRowEditComponent } from './material/material-row-edit.component';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import { MaterialAddComponent } from './material/material-add.component';
     MaterialListComponent,
     MaterialRowComponent,
     MaterialAddComponent,
+    MaterialListEditComponent,
+    MaterialRowEditComponent,
   ],
   imports: [
     BrowserModule,

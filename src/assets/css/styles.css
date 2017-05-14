@@ -688,7 +688,7 @@ nav a.button-collapse {
 .material-item {
   color: #fff;
   background-color: rgba(0, 0, 0, 0.24);
-  padding: 12px 16px;
+  padding: 8px 16px;
   margin-bottom: 8px;
   display: -webkit-flex;
   display: flex;
@@ -701,19 +701,24 @@ nav a.button-collapse {
 .material-item .icon {
   width: 32px;
   padding: 8px 0px;
+  cursor: pointer;
 }
-/* line 18, ../sass/_material-row.scss */
+/* line 19, ../sass/_material-row.scss */
+.material-item a {
+  color: #ffffff;
+}
+/* line 23, ../sass/_material-row.scss */
 .material-item .content {
   width: 100%;
   -webkit-flex-direction: column;
   flex-direction: column;
 }
-/* line 25, ../sass/_material-row.scss */
+/* line 30, ../sass/_material-row.scss */
 .material-item .content .title:first-letter {
   text-transform: uppercase;
 }
 
-/* Task detail */
+/* Material add */
 /* line 3, ../sass/_material-add.scss */
 .material-detail {
   font-weight: 300;

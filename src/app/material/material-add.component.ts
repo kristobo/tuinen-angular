@@ -5,6 +5,7 @@ import { Material } from '../model/material.model';
 import { MaterialService } from '../services/material.service';
 import { JobService } from '../services/job.service';
 import { DataService } from '../services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-material-add',
@@ -18,7 +19,8 @@ export class MaterialAddComponent implements OnInit {
   constructor(private activatedRoute      : ActivatedRoute,
               private materialService     : MaterialService,
               private jobService          : JobService,
-              private dataService         : DataService,) { }
+              private dataService         : DataService,
+              private router              : Router,) { }
 
   ngOnInit() {
 
@@ -39,6 +41,7 @@ export class MaterialAddComponent implements OnInit {
     this.material.hoeveelheid = this.material.hoeveelheid - 0.5;
   }
 
+  // Add material to job and go back.
   updateJobMaterial(){
     this.loading = true;
     let job: any = new Job(this.jobService.getCurrent());
@@ -46,6 +49,7 @@ export class MaterialAddComponent implements OnInit {
     this.dataService.addJobMaterial(this.material).subscribe(
         data => {
           this.loading = false;
+          this.router.navigate(["/task", job.task.id]);
           console.log(data);
         },
         error => {

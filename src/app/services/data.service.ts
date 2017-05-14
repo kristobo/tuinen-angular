@@ -27,6 +27,13 @@ export class DataService {
             .catch(this.handleError);
     }
 
+    // Get all materials.
+    public getAllMaterialsForJob(id: number): Observable<Material[]>{
+        return this.http.get('/material/job/'+id)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
     // Get customer info by id.
     public getCustomer(id: number): Observable<Customer>{
         return this.http.get('/customer/' + id)
