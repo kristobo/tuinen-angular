@@ -31,7 +31,6 @@ export class MaterialListEditComponent implements OnInit {
             materials =>{
               this.loading = false;
               this.materialList = materials;
-
             },
             error => {
               this.loading = false;

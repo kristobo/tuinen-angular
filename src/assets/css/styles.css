@@ -690,6 +690,7 @@ nav a.button-collapse {
   background-color: rgba(0, 0, 0, 0.24);
   padding: 8px 16px;
   margin-bottom: 8px;
+  min-height: 53px;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
@@ -697,23 +698,23 @@ nav a.button-collapse {
   -webkit-align-items: center;
   align-items: center;
 }
-/* line 13, ../sass/_material-row.scss */
+/* line 14, ../sass/_material-row.scss */
 .material-item .icon {
   width: 32px;
   padding: 8px 0px;
   cursor: pointer;
 }
-/* line 19, ../sass/_material-row.scss */
+/* line 20, ../sass/_material-row.scss */
 .material-item a {
   color: #ffffff;
 }
-/* line 23, ../sass/_material-row.scss */
+/* line 24, ../sass/_material-row.scss */
 .material-item .content {
   width: 100%;
   -webkit-flex-direction: column;
   flex-direction: column;
 }
-/* line 30, ../sass/_material-row.scss */
+/* line 31, ../sass/_material-row.scss */
 .material-item .content .title:first-letter {
   text-transform: uppercase;
 }
