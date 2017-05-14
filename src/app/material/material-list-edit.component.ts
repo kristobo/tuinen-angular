@@ -30,13 +30,21 @@ export class MaterialListEditComponent implements OnInit {
         .subscribe(
             materials =>{
               this.loading = false;
-              this.materialList = materials;
+              this.materialList = this.sortedMaterials(materials);
             },
             error => {
               this.loading = false;
               console.log(error);
             }
         );
+  }
+
+  sortedMaterials(materials: Material[]): Material[] {
+        return materials.sort((a: Material, b: Material) => {
+            if (a.naam < b.naam) return -1;
+            else if (a.naam > b.naam) return 1;
+            else return 0;
+        });
   }
 
 }
