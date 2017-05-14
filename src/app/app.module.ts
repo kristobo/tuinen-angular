@@ -19,6 +19,10 @@ import { MapComponent } from './map/map.component';
 import { TaskCustomerComponent } from './task/task-customer.component';
 import { TrackingService } from "./services/tracking.service";
 import { DataService } from "./services/data.service";
+import { MaterialListComponent } from './material/material-list.component';
+import { MaterialRowComponent } from './material/material-row.component';
+import { MaterialAddComponent } from './material/material-add.component';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +34,9 @@ import { DataService } from "./services/data.service";
     HeaderComponent,
     MapComponent,
     TaskCustomerComponent,
+    MaterialListComponent,
+    MaterialRowComponent,
+    MaterialAddComponent,
   ],
   imports: [
     BrowserModule,

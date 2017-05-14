@@ -1,0 +1,24 @@
+<div class="material-list row">
+  <div class="container">
+    <div class="col s12 m6 offset-m3">
+      <h2>Materiaal toevoegen</h2>
+
+      <div [hidden]="!loading" class="spinner">
+        <div class="d1"></div>
+        <div class="d2"></div>
+      </div>
+
+      <div *ngIf="error" class="error">{{error}}</div>
+
+      <div [hidden]="loading">
+        <app-material-row
+                *ngFor="let material of materialList"
+                [material]="material">
+        </app-material-row>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+

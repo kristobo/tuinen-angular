@@ -1,0 +1,53 @@
+
+<div class="material-detail row">
+
+  <div class="container">
+    <div class="col s12 m6 offset-m3">
+
+      <div [hidden]="!loading" class="spinner">
+        <div class="d1"></div>
+        <div class="d2"></div>
+      </div>
+
+      <div class="inner-wrapper" [hidden]="loading">
+        <div class="row detail-header">
+          <div class="name">
+            {{ material.naam }}
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="input-field">
+            <input class="textfield-input" type="number" id="value" min="0"
+                   #value
+                   (change)="this.material.hoeveelheid = value.value"
+                   value="{{material.hoeveelheid}}"
+                   step="0.1">
+            <label for="value"></label>
+            {{ material.eenheidsmaat }}
+          </div>
+
+        </div>
+
+
+        <div class="row actions">
+          <button (click)="remove()" class="remove"><span></span> <i class="material-icons">remove</i></button>
+          <button (click)="add()" class="add"><span></span> <i class="material-icons">add</i></button>
+        </div>
+
+        <div class="row">
+          <button (click)="updateJobMaterial()" class="btn submit-button">
+            Toevoegen
+          </button>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+

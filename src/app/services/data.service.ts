@@ -6,6 +6,7 @@ import { Job } from '../model/job.model';
 import { Customer } from '../model/customer.model';
 import { Address } from '../model/address.model';
 import { Observable} from "rxjs";
+import { Material } from '../model/material.model';
 
 @Injectable()
 export class DataService {
@@ -15,6 +16,13 @@ export class DataService {
     // Get all tasks.
     public getAllTasks(): Observable<Task[]>{
         return this.http.get('/task/all')
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    // Get all materials.
+    public getAllMaterials(): Observable<Material[]>{
+        return this.http.get('/material/all')
             .map((response: Response) => response.json())
             .catch(this.handleError);
     }
@@ -50,14 +58,14 @@ export class DataService {
     }
 
     // Update task progress.
-    public updateProgress(job: any){
+    public updateProgress(job: Job){
         return this.http.post('/task/progress', job)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
 
     // Update task status.
-    public updateStatus(job: any){
+    public updateStatus(job: Job){
         return this.http.post('/status/update', job)
             .map((res: Response) => res.json())
             .catch(this.handleError);
@@ -66,6 +74,13 @@ export class DataService {
     // Update tracking info.
     public trackTaskTime(track: Track){
         return this.http.post('/task/track', track)
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
+
+    // Update tracking info.
+    public addJobMaterial(material: Material){
+        return this.http.post('/material/job/add', material)
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }

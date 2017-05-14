@@ -17,7 +17,6 @@ export class TrackingService {
         this.track = new Track(opdrachtId, taskId, startTime, null);
         localStorage.setItem(taskId.toString(), "started-once");
         console.log("track-start", this.track);
-
     }
 
     // Stop tracking
@@ -27,6 +26,7 @@ export class TrackingService {
             data => {
                 console.log(data);
                 this.track = null;
+                return true;
             },
             error => {
                 console.log(error);
@@ -46,7 +46,7 @@ export class TrackingService {
        return active;
     }
 
-    // Check if any task is running
+    // Check if any task is runni
     public isTrackRunning(){
         let running: boolean = false;
         if(!isUndefined(this.track) && this.track != null){

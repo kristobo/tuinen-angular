@@ -1,0 +1,75 @@
+/* Task detail */
+
+.material-detail{
+  font-weight:300;
+
+  .inner-wrapper{
+    margin-top:30px;
+    background-color: rgba(0, 0, 0, 0.24);
+    padding: 15px 30px;
+  }
+
+  .detail-header{
+    margin: 0px -.75rem 30px;
+
+
+    .name{
+      font-size:1.6em;
+
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .actions{
+    margin-bottom: 40px;
+
+    button{
+      background: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+      padding:8px;
+
+      width:48%;
+      float:left;
+
+      &.remove{
+        margin-right:2%;
+
+      }
+
+      &.add{
+        margin-left:2%;
+      }
+
+      &[disabled]{
+        border: 1px solid rgba(0, 0, 0, 0.24);;
+        color: rgba(0, 0, 0, 0.24);
+      }
+
+      span{
+        vertical-align:middle;
+      }
+
+      .material-icons{
+        vertical-align: middle;
+      }
+
+    }
+  }
+
+  label{
+    color:#ffffff;
+  }
+
+  input[type="number"]{
+    font-size: 1.4em;
+    border-bottom: 1px solid #ffffff;
+    width:auto;
+  }
+
+
+}
+
+

@@ -1,5 +1,6 @@
-import {Customer} from "./customer.model";
-import {Task} from "./task.model";
+import { Customer } from "./customer.model";
+import { Task } from "./task.model";
+import { Material } from "./material.model";
 
 export class Job {
 
@@ -19,5 +20,6 @@ export class Job {
         this.lat            = obj && obj.lat                || null;
         this.task           = obj && obj.task               || null;
         this.customer       = obj && obj.customer           || null;
+
     }
 }

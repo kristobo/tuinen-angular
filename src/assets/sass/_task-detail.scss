@@ -3,14 +3,33 @@
 .task-detail{
   font-weight:300;
 
+  .inner-wrapper{
+    margin-top:30px;
+    background-color: rgba(0, 0, 0, 0.24);
+    padding: 15px 30px;
+  }
+
   .detail-header{
-    margin: 30px -.75rem;
+    margin: 0px -.75rem 30px;
 
 
     .intro{
+
       .name{
         font-size:1.6em;
+
+        &:first-letter {
+          text-transform: uppercase;
+        }
+
       }
+
+      .category{
+        &:first-letter {
+          text-transform: uppercase;
+        }
+      }
+
       .adress{
         font-size:1.2em;
       }

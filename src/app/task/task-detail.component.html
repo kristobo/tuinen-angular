@@ -9,7 +9,7 @@
         <div class="d2"></div>
      </div>
 
-     <div [hidden]="loading">
+     <div class="inner-wrapper" [hidden]="loading">
          <div class="row detail-header">
              <div class="col s10">
                  <div class="intro">
@@ -47,7 +47,7 @@
 
                      <ul id='dropdown-menu' class='dropdown-content'>
                          <li><a [routerLink]="['/task/map']">Toon adres op kaart</a></li>
-                         <li><a [routerLink]="['/task/map']">Voeg materiaal toe</a></li>
+                         <li><a [routerLink]="['/material/list']">Voeg materiaal toe</a></li>
                      </ul>
 
                  </button>

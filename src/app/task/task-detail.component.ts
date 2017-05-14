@@ -4,12 +4,14 @@ import { Job } from '../model/job.model';
 import { DataService } from '../services/data.service';
 import { TrackingService } from "../services/tracking.service";
 import { TaskStatus } from "./enum.status";
+import { JobService } from "../services/job.service";
 
 declare var jQuery:any;
 
 @Component({
   selector: 'app-task-detail',
   templateUrl: './task-detail.component.html',
+  providers: [JobService],
 })
 export class TaskDetailComponent implements OnInit, AfterViewInit {
   job: Job;
@@ -19,7 +21,8 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
   constructor(private activatedRoute : ActivatedRoute,
               private dataService    : DataService,
-              private trackingService: TrackingService
+              private trackingService: TrackingService,
+              private jobService     : JobService,
               ) {
      }
 
@@ -33,14 +36,14 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
   // Get current job info and store in sessionStorage.
   getJobInfo(){
-     this.loading = true;
+      this.loading = true;
       this.activatedRoute.params.subscribe((params: Params) => {
           let taskId = params['id'];
           this.dataService.getJobByTaskId(taskId).subscribe(
               job =>{
                   this.loading = false;
                   this.job = job;
-                  sessionStorage.setItem('job', JSON.stringify(job));
+                  this.jobService.save(job);
 
                   // Get rest of the info.
                   this.getCustomerInfo(this.job.klantId);
@@ -93,7 +96,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
           .subscribe(
               address =>{
                   this.job.customer.address = address;
-                  sessionStorage.setItem('job', JSON.stringify(this.job));
+                  this.jobService.save(this.job);
               },
               error => {
                   console.log(error);
@@ -134,6 +137,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
   // Update task progress.
   updateProgress(value){
+      this.loading = true;
 
       if(value == 100){
           this.paused = true;
@@ -148,11 +152,13 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
       }
 
       this.job.task.vooruitgangPercentage = value;
-      this.dataService.updateProgress(JSON.stringify(this.job)).subscribe(
+      this.dataService.updateProgress(this.job).subscribe(
           data => {
+              this.loading = false;
               console.log(data);
           },
           error => {
+              this.loading = true;
               console.log(error);
           }
       );
@@ -160,12 +166,16 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
   // Set correct task status.
   updateStatus(statusId: number){
+      this.loading = true;
+
       this.job.task.statusId = statusId;
-      this.dataService.updateStatus(JSON.stringify(this.job)).subscribe(
+      this.dataService.updateStatus(this.job).subscribe(
           data => {
+              this.loading = false;
               console.log(data);
-          },
+              },
           error => {
+              this.loading = false;
               console.log(error);
           }
       );
