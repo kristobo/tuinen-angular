@@ -15,6 +15,8 @@ import { Router } from '@angular/router';
 export class MaterialAddComponent implements OnInit {
   material: Material;
   loading: boolean = false;
+  step:number = 0.5;
+
 
   constructor(private activatedRoute      : ActivatedRoute,
               private materialService     : MaterialService,
@@ -27,18 +29,22 @@ export class MaterialAddComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       let materialId = params['id'];
       this.material = this.materialService.getMaterialById(materialId);
-
+      if(this.material.eenheidsmaat == "stuk"){
+        this.step = 1;
+      }
     });
   }
 
   // Increase value.
   add(){
-    this.material.hoeveelheid = this.material.hoeveelheid + 0.5;
+    this.material.hoeveelheid = this.material.hoeveelheid + this.step;
   }
 
   // Decrease value.
   remove(){
-    this.material.hoeveelheid = this.material.hoeveelheid - 0.5;
+    if(this.material.hoeveelheid >= this.step){
+      this.material.hoeveelheid = this.material.hoeveelheid - this.step;
+    }
   }
 
   // Add material to job and go back.

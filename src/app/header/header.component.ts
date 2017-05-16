@@ -1,4 +1,6 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {Router} from '@angular/router';
+
 declare var jQuery:any; //Make Jquery enable as variable
 
 @Component({
@@ -9,7 +11,7 @@ declare var jQuery:any; //Make Jquery enable as variable
 export class HeaderComponent implements OnInit, AfterViewInit {
 
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
@@ -23,6 +25,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       jQuery('.button-collapse').not('.active').sideNav('hide');
     });
 
+  }
+
+  goToHome(){
+    this.router.navigate(["/tasks"]);
   }
 
 

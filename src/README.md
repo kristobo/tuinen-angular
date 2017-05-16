@@ -14,3 +14,12 @@ Extra command's
 ng build --prod --bh /root/dist/
 ng build --bh /eindwerk/dist/
 
+
+
+Opbouw
+------
+
+- stuur login gegevens en krijg een token van de server
+- bij de volgende requests wordt de header mee verzonden
+- alle api endpoint zijn op server niveau beveiligd
+- alle page's binnen angular zijn beveiligd dmv guard
