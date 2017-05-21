@@ -135,7 +135,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
                     }else{
                         this.loading = false;
-                        this.message = "U bevindt zich niet binnen 200m van het adres (" + distance+")";
+                        this.message = "U bevindt zich niet binnen 200m van het adres (" + distance+" km)";
                     }
                 },
                 error => {
