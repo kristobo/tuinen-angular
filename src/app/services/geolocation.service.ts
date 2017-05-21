@@ -12,7 +12,22 @@ const GEOLOCATION_ERRORS = {
 @Injectable()
 export class GeolocationService {
 
+
   constructor() { }
+
+  initLocation(){
+    if (window.navigator && window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(
+          (position) => {
+            console.log(position);
+          },
+          (error) => {
+            console.log(error);
+          }
+      );
+    }
+
+  }
 
   // Get geolocation from device and calculate distance.
   getRangeOfCoordinates(lat,long): Observable<any> {
