@@ -158,6 +158,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
   // Update task progress.
   updateProgress(value){
       this.loading = true;
+      this.message = "";
 
       if(value == 100){
           this.paused = true;
