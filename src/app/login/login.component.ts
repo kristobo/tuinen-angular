@@ -2,11 +2,12 @@ import {Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from "../auth/auth.service";
-
+import { GeolocationService } from "../services/geolocation.service";
 
 @Component({
   selector: 'app-login',
   templateUrl: 'login.component.html',
+  providers: [GeolocationService],
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
       private fb: FormBuilder,
       private authService: AuthService,
-      private router: Router) {
+      private router: Router,
+      private geo: GeolocationService) {
 
     this.loginForm = fb.group({
       username: ['', Validators.required],
@@ -45,6 +47,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.authService.logout();
+    this.geo.initLocation();
   }
 
 }

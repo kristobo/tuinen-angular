@@ -47,7 +47,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
                   this.loading = false;
                   this.job = job;
                   this.jobService.save(job);
-console.log(job);
+
                   // Get rest of the info.
                   this.getCustomerInfo(this.job.klantId);
 
@@ -135,7 +135,7 @@ console.log(job);
 
                     }else{
                         this.loading = false;
-                        this.message = "U bevindt zich niet binnen 200m van het adres";
+                        this.message = "U bevindt zich niet binnen 200m van het adres (" + distance+")";
                     }
                 },
                 error => {
