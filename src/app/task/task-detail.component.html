@@ -18,7 +18,7 @@
 
                 <div [ngSwitch]="job?.customer?.bedrijfnaam">
                    <div *ngSwitchCase="null">
-                      <div class="category">{{ job?.customer?.voornaam }} {{ job?.customer?.naam || "loading..." }}</div>
+                      <div class="category">{{ job?.customer?.voornaam }} {{ job?.customer?.naam || "loading..." }} </div>
                    </div>
                    <div *ngSwitchDefault>
                       <div class="category">{{ job?.customer?.bedrijfnaam || "loading..."}}</div>
@@ -57,25 +57,33 @@
          </div>
 
 
-         <div *ngIf="disActions" class="error">{{disActions}}</div>
+         <div *ngIf="message" class="error">{{message}}</div>
 
-         <div *ngIf="!disActions" class="row actions">
+         <div *ngIf="showActions" class="row actions">
              <button class="start-pauze" [disabled]="job?.task?.vooruitgangPercentage == 100">
                  <div class="start"
                       *ngIf="paused"
-                      (click)="ActionButtun('play')"><span>Start</span><i class="material-icons">play_arrow</i></div>
+                      (click)="ActionButtun('play')"><span>Start</span><i class="material-icons">play_arrow</i>
+                 </div>
 
                  <div class="pauze"
                       *ngIf="!paused"
-                      (click)="ActionButtun('pauze')"><span>Pauze</span><i class="material-icons">pause</i></div>
+                      (click)="ActionButtun('pauze')"><span>Pauze</span><i class="material-icons">pause</i>
+                      <i class="fa fa-refresh fa-spin fa-lg"></i>
+                 </div>
 
              </button>
 
              <button (click)="ActionButtun('stop')" class="stop"><span>Finish</span> <i class="material-icons">stop</i></button>
          </div>
 
+         <div class="row">
+             <div class="col s12 detail-item"><span>Vooruitgang:</span>{{ job?.task?.vooruitgangPercentage  }}%  </div>
+             <div class="col s12 detail-item" *ngIf="job?.task?.statusId"><span>Status:</span>{{getStatus(job?.task?.statusId)}}</div>
+         </div>
+
          <div class="row range-field">
-             <div class="col s12">Vooruitgang: {{ job?.task?.vooruitgangPercentage  }}%</div>
+
              <input type="range"
                     id="status-range"
                     #statusRange

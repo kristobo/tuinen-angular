@@ -83,7 +83,7 @@
   }
 
   .range-field{
-    margin-top: 45px;
+    margin-top: 35px;
     margin-bottom: 30px;
 
     input[type=range]{
@@ -104,12 +104,26 @@
     /***** These are to edit the thumb and the text inside the thumb *****/
     input[type=range] + .thumb {
       background-color: $title_bg;
+
     }
-    
+
+    input[type=range] + .thumb.active{
+      margin-top: -15px;
+    }
 
   }
 
 }
+
+.detail-item{
+  font-size:13px;
+
+  span{
+    display: inline-block;
+    width: 100px;
+  }
+}
+
 
 /* Range */
 

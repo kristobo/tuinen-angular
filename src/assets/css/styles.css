@@ -664,7 +664,7 @@ nav a.button-collapse {
 }
 /* line 85, ../sass/_task-detail.scss */
 .task-detail .range-field {
-  margin-top: 45px;
+  margin-top: 35px;
   margin-bottom: 30px;
   /***** These are to edit the thumb and the text inside the thumb *****/
 }
@@ -689,9 +689,23 @@ nav a.button-collapse {
 .task-detail .range-field input[type=range] + .thumb {
   background-color: rgba(0, 0, 0, 0.64);
 }
+/* line 110, ../sass/_task-detail.scss */
+.task-detail .range-field input[type=range] + .thumb.active {
+  margin-top: -15px;
+}
+
+/* line 118, ../sass/_task-detail.scss */
+.detail-item {
+  font-size: 13px;
+}
+/* line 121, ../sass/_task-detail.scss */
+.detail-item span {
+  display: inline-block;
+  width: 100px;
+}
 
 /* Range */
-/* line 117, ../sass/_task-detail.scss */
+/* line 131, ../sass/_task-detail.scss */
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   border: none;
@@ -705,7 +719,7 @@ input[type=range]::-webkit-slider-thumb {
   transition: .3s;
 }
 
-/* line 131, ../sass/_task-detail.scss */
+/* line 145, ../sass/_task-detail.scss */
 input[type=range]::-moz-range-thumb {
   border: none;
   height: 14px;
@@ -715,18 +729,18 @@ input[type=range]::-moz-range-thumb {
   margin-top: -5px;
 }
 
-/* line 140, ../sass/_task-detail.scss */
+/* line 154, ../sass/_task-detail.scss */
 input[type=range]:-moz-focusring {
   outline: 1px solid #fff;
   outline-offset: -1px;
 }
 
-/* line 145, ../sass/_task-detail.scss */
+/* line 159, ../sass/_task-detail.scss */
 input[type=range]:focus::-moz-range-track {
   background: #ccc;
 }
 
-/* line 149, ../sass/_task-detail.scss */
+/* line 163, ../sass/_task-detail.scss */
 input[type=range]::-ms-track {
   height: 3px;
   background: transparent;
@@ -736,17 +750,17 @@ input[type=range]::-ms-track {
   color: transparent;
 }
 
-/* line 158, ../sass/_task-detail.scss */
+/* line 172, ../sass/_task-detail.scss */
 input[type=range]::-ms-fill-lower {
   background: #777;
 }
 
-/* line 163, ../sass/_task-detail.scss */
+/* line 177, ../sass/_task-detail.scss */
 input[type=range]::-ms-fill-upper {
   background: #ddd;
 }
 
-/* line 167, ../sass/_task-detail.scss */
+/* line 181, ../sass/_task-detail.scss */
 input[type=range]::-ms-thumb {
   border: none;
   height: 14px;
@@ -755,12 +769,12 @@ input[type=range]::-ms-thumb {
   background: #26a69a;
 }
 
-/* line 175, ../sass/_task-detail.scss */
+/* line 189, ../sass/_task-detail.scss */
 input[type=range]:focus::-ms-fill-lower {
   background: #888;
 }
 
-/* line 179, ../sass/_task-detail.scss */
+/* line 193, ../sass/_task-detail.scss */
 input[type=range]:focus::-ms-fill-upper {
   background: #ccc;
 }

@@ -7,8 +7,8 @@ export class Job {
     id: number;
     klantId: number;
     klantAdresId: number;
-    long: number;
-    lat: number;
+    longitude: number;
+    latitude: number;
     task: Task;
     customer: Customer;
 
@@ -16,8 +16,8 @@ export class Job {
         this.id             = obj && obj.id                 || null;
         this.klantId        = obj && obj.klantId            || null;
         this.klantAdresId   = obj && obj.klantAdresId       || null;
-        this.long           = obj && obj.long               || null;
-        this.lat            = obj && obj.lat                || null;
+        this.longitude      = obj && obj.longitude          || null;
+        this.latitude       = obj && obj.latitude           || null;
         this.task           = obj && obj.task               || null;
         this.customer       = obj && obj.customer           || null;
 

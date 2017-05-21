@@ -5,24 +5,27 @@ import { DataService } from '../services/data.service';
 import { TrackingService } from "../services/tracking.service";
 import { TaskStatus } from "./enum.status";
 import { JobService } from "../services/job.service";
+import { GeolocationService } from "../services/geolocation.service";
 
 declare var jQuery:any;
 
 @Component({
   selector: 'app-task-detail',
   templateUrl: './task-detail.component.html',
-  providers: [JobService],
+  providers: [JobService, GeolocationService],
 })
 export class TaskDetailComponent implements OnInit, AfterViewInit {
   job: Job;
   paused: boolean = true;
   loading: boolean;
-  disActions: String;
+  showActions: boolean = true;
+  message: String;
 
   constructor(private activatedRoute : ActivatedRoute,
               private dataService    : DataService,
               private trackingService: TrackingService,
               private jobService     : JobService,
+              private geo            : GeolocationService,
               ) {
      }
 
@@ -44,7 +47,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
                   this.loading = false;
                   this.job = job;
                   this.jobService.save(job);
-
+console.log(job);
                   // Get rest of the info.
                   this.getCustomerInfo(this.job.klantId);
 
@@ -68,7 +71,8 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
               this.paused = false;
           }else{
               // If track is running on an other job, then show a message.
-              this.disActions = "Een andere taak is actief";
+              this.showActions = false;
+              this.message = "Een andere taak is actief";
           }
       }
   }
@@ -114,14 +118,30 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
         // ButtenHandler.
         if(status == "play") {
-            this.paused = false;
-            let status = TaskStatus.Gestart;
+            this.loading = true;
+            // Check if you are in the correct zone to record a job.
+            this.geo.getRangeOfCoordinates(this.job.latitude, this.job.longitude).subscribe(
+                distance => {
+                    // if distance is smaller than 200m start tracking
+                    if(distance < 0.2){
+                        this.paused = false;
+                        let status = TaskStatus.Gestart;
 
-            if(this.startedOne()){
-                status = TaskStatus.Hervat;
-            }
-            this.updateStatus(status);
-            this.trackingService.start(this.job.id, this.job.task.id, time);
+                        if(this.startedOne()){
+                            status = TaskStatus.Hervat;
+                        }
+                        this.updateStatus(status);
+                        this.trackingService.start(this.job.id, this.job.task.id, time);
+
+                    }else{
+                        this.loading = false;
+                        this.message = "U bevindt zich niet binnen 200m van het adres";
+                    }
+                },
+                error => {
+                    this.message = error;
+                }
+            );
 
         }
         else if(status == "stop"){
@@ -184,11 +204,33 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
   // Not used because original value gets overwritten.
   setCoordinates(){
-      navigator.geolocation.getCurrentPosition(function(location) {
-          this.job.long = location.coords.longitude;
-          this.job.lat = location.coords.latitude;
-        });
+
+      let onSuccess = function(position) {
+          alert('Latitude: '          + position.coords.latitude          + '\n' +
+              'Longitude: '         + position.coords.longitude         + '\n' +
+              'Altitude: '          + position.coords.altitude          + '\n' +
+              'Accuracy: '          + position.coords.accuracy          + '\n' +
+              'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+              'Heading: '           + position.coords.heading           + '\n' +
+              'Speed: '             + position.coords.speed             + '\n' +
+              'Timestamp: '         + position.timestamp                + '\n');
+
+          this.currentLong = position.coords.longitude;
+          this.currentLat = position.coords.latitude;
+
+      };
+
+      // onError Callback receives a PositionError object
+      //
+      function onError(error) {
+          alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+      }
+
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
   }
+
 
   // Check if started one to set correct status.
   startedOne(){
@@ -197,6 +239,10 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
           return true;
       }
       return false;
+  }
+
+  getStatus(id){
+      return TaskStatus[id];
   }
 
   initMaterializeJs(){
