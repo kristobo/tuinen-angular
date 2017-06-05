@@ -27,17 +27,17 @@ export class AuthService {
             data,
             { headers: headers })
             .map((response: Response) => {
-                sessionStorage.setItem('token', response.text())
+                localStorage.setItem('token', response.text())
             }
       );
   }
 
   logout(): void {
-      sessionStorage.removeItem('token');
+      localStorage.removeItem('token');
   }
 
   isLoggedIn(): boolean{
-      let token = sessionStorage.getItem('token');
+      let token = localStorage.getItem('token');
       if(token){
           return true;
       }

@@ -47,6 +47,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
                   this.loading = false;
                   this.job = job;
                   this.jobService.save(job);
+                  console.log(job);
 
                   // Get rest of the info.
                   this.getCustomerInfo(this.job.klantId);
@@ -111,12 +112,12 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
   ActionButtun(status) {
     // Prevent recording when task is finished.
-    // /1000 because getTime is in milliseconds.
+    // 1000 because getTime is in milliseconds.
     let time = new Date().getTime()/1000;
 
     if(this.job.task.vooruitgangPercentage !=100){
 
-        // ButtenHandler.
+        // ButtonHandler.
         if(status == "play") {
             this.loading = true;
             // Check if you are in the correct zone to record a job.
@@ -189,7 +190,9 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
   updateStatus(statusId: number){
       this.loading = true;
 
+      this.job.task.status = this.getStatus(statusId);
       this.job.task.statusId = statusId;
+
       this.dataService.updateStatus(this.job).subscribe(
           data => {
               this.loading = false;

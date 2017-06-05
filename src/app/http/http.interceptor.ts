@@ -41,7 +41,7 @@ export class InterceptedHttp extends Http {
         if (options.headers == null) {
             options.headers = new Headers();
         }
-        let token = sessionStorage.getItem('token');
+        let token = localStorage.getItem('token');
 
         if(token && path != "/login" ){
             options.headers.append('Authorization', token);

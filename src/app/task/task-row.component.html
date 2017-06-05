@@ -10,7 +10,7 @@
       </app-task-customer>
 
       <div class="status">
-         <span>status: {{task.vooruitgangPercentage}}%</span>
+         <span>Vooruitgang: {{task.vooruitgangPercentage}}%</span>
          <i *ngIf="task.vooruitgangPercentage==100" class="fa fa-check complete" aria-hidden="true"></i>
          <i *ngIf="isActive()" class="fa fa-refresh fa-spin fa-lg"></i>
       </div>

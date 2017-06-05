@@ -46,7 +46,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.logout();
+    //this.authService.logout();
+    if(this.authService.isLoggedIn()){
+      this.router.navigate(["/tasks"]);
+    }
     this.geo.initLocation();
   }
 

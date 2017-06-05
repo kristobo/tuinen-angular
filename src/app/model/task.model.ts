@@ -7,6 +7,7 @@ export class Task {
     opmerking: string;
     klantId: number;
     opdrachtId: number;
+    status: string;
     statusId: number;
     customer: Customer;
     vooruitgangPercentage: number;
@@ -17,6 +18,7 @@ export class Task {
         this.opmerking      = obj && obj.opmerking        || null;
         this.klantId        = obj && obj.klantId          || null;
         this.opdrachtId     = obj && obj.opdrachtId       || null;
+        this.status         = obj && obj.status           || null;
         this.statusId       = obj && obj.statusId         || null;
         this.customer       = obj && obj.customer         || null;
         this.vooruitgangPercentage       = obj && obj.vooruitgangPercentage    || null;

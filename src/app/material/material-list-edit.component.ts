@@ -34,6 +34,7 @@ export class MaterialListEditComponent implements OnInit {
             },
             error => {
               this.loading = false;
+              this.error = error;
               console.log(error);
             }
         );

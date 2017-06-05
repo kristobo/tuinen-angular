@@ -7,7 +7,7 @@
 
     <ul class="left side-nav" id="slide-out">
       <li><a [routerLink]="['/tasks']" [routerLinkActive]="['active']">Overzicht taken</a></li>
-      <li><a [routerLink]="['/login']" [routerLinkActive]="['active']">Logout</a></li>
+      <li><a [routerLink]="['/login']" [routerLinkActive]="['active']" (click)="logOut()">Logout</a></li>
     </ul>
 
     <a href="#" class="button-collapse" data-activates="slide-out">

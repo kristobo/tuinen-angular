@@ -1,5 +1,6 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {AuthService} from "../auth/auth.service";
 
 declare var jQuery:any; //Make Jquery enable as variable
 
@@ -11,7 +12,8 @@ declare var jQuery:any; //Make Jquery enable as variable
 export class HeaderComponent implements OnInit, AfterViewInit {
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -31,7 +33,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.router.navigate(["/tasks"]);
   }
 
-
-
-
+  logOut(){
+    this.authService.logout();
+  }
 }
