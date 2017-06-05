@@ -82,8 +82,7 @@
              <div class="col s12 detail-item" *ngIf="job?.task?.status"><span>Status:</span>{{job?.task?.status}}</div>
          </div>
 
-         <div class="row range-field">
-
+         <div class="row range-field" [ngClass]="{completed: completed}">
              <input type="range"
                     id="status-range"
                     #statusRange

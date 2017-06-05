@@ -20,6 +20,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
   loading: boolean;
   showActions: boolean = true;
   message: String;
+  completed: boolean;
 
   constructor(private activatedRoute : ActivatedRoute,
               private dataService    : DataService,
@@ -160,9 +161,11 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
   updateProgress(value){
       this.loading = true;
       this.message = "";
+      this.completed = false;
 
       if(value == 100){
           this.paused = true;
+          this.completed = true;
           this.updateStatus(TaskStatus.Afgewerkt);
 
           if(this.trackingService.isTrackRunning() &&

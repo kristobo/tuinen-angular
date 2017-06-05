@@ -779,6 +779,11 @@ input[type=range]:focus::-ms-fill-upper {
   background: #ccc;
 }
 
+/* line 197, ../sass/_task-detail.scss */
+.completed .thumb {
+  display: none;
+}
+
 /* List row */
 /* line 3, ../sass/_material-row.scss */
 .material-item {
