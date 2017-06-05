@@ -11,8 +11,8 @@ ng build --bh /android_asset/www/  !!!
 Extra command's
 ---------------
 
-ng build --prod --bh /root/dist/
-ng build --bh /eindwerk/dist/
+ng build --prod --bh /android_asset/www/
+ng build --bh /android_asset/www/
 
 
 

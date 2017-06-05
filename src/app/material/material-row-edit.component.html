@@ -1,7 +1,8 @@
 <div class="material-item">
 
-  <div class="content">
-    <div class="title">{{ material.hoeveelheid }} {{ material.eenheidsmaat }}  {{ material.naam }}</div>
+  <div class="content" [ngSwitch]="material.eenheidsmaat">
+    <div class="title" *ngSwitchCase="'stuk'">{{ material.hoeveelheid }}x {{ material.naam }}</div>
+    <div class="title" *ngSwitchDefault>{{ material.hoeveelheid }}{{ material.eenheidsmaat }}  {{ material.naam }}</div>
   </div>
 
   <div class="icon">
