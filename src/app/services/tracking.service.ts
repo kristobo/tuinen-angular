@@ -46,7 +46,7 @@ export class TrackingService {
        return active;
     }
 
-    // Check if any task is runni
+    // Check if any task is running
     public isTrackRunning(){
         let running: boolean = false;
         if(!isUndefined(this.track) && this.track != null){
