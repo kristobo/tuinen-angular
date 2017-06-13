@@ -10,7 +10,6 @@ export class Address {
     postcode: number;
     plaats: string;
 
-
     constructor(obj: any) {
         this.id             = obj && obj.id                 || null;
         this.straat         = obj && obj.straat             || null;
@@ -18,7 +17,6 @@ export class Address {
         this.bus            = obj && obj.bus                || null;
         this.postcode       = obj && obj.postcode           || null;
         this.plaats         = obj && obj.plaats             || null;
-
 
     }
 }
