@@ -113,8 +113,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
   ActionButtun(status) {
     // Prevent recording when task is finished.
-    // 1000 because getTime is in milliseconds.
-    let time = new Date().getTime()/1000;
+    let time = new Date().getTime();
 
     if(this.job.task.vooruitgangPercentage !=100){
 
@@ -170,7 +169,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
           if(this.trackingService.isTrackRunning() &&
              this.trackingService.isTaskActive(this.job.task.id)){
-              let time = new Date().getTime()/1000;
+              let time = new Date().getTime();
               this.trackingService.stop(time);
           }
 
