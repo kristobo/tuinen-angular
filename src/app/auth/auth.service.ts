@@ -41,7 +41,8 @@ export class AuthService {
       // Use default form format to send.
       let params = new URLSearchParams();
       params.append('username', formData.username);
-      params.append('password', formData.pass_n1);
+      params.append('password', formData.password);
+      params.append('pass_new', formData.pass_n1);
       let data = params.toString();
 
       // Post!
