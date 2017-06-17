@@ -12,6 +12,7 @@
                 <h1 >Login</h1>
 
                 <div *ngIf="error" class="error">{{error}}</div>
+                <div *ngIf="message" class="message">{{message}}</div>
 
                 <form [formGroup]="loginForm"
                       (ngSubmit)="onSubmit(loginForm)">
@@ -32,7 +33,7 @@
                          [class.has-error]="!loginForm.controls['password'].valid
                             && loginForm.controls['password'].touched">
 
-                        <label for="password">Geef u paswoord in:</label>
+                        <label for="password">Geef uw paswoord in:</label>
 
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-lock fa-lg"></i></span>
@@ -44,6 +45,8 @@
                     <button class="btn submit-button" [disabled]="!loginForm.valid">
                         Inloggen
                     </button>
+
+                    <a class="reset-link" [routerLink]="['/login/reset']">Paswoord wijzigen</a>
                 </form>
 
             </div>

@@ -32,6 +32,30 @@ export class AuthService {
       );
   }
 
+  changePassword(formData: any){
+
+      // Set correct headers.
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+      // Use default form format to send.
+      let params = new URLSearchParams();
+      params.append('username', formData.username);
+      params.append('password', formData.pass_n1);
+      let data = params.toString();
+
+      // Post!
+      return this.http.post(
+          '/password',
+          data,
+          { headers: headers })
+          .map((response: Response) => {
+                  console.log(response);
+          }
+      );
+
+  }
+
   logout(): void {
       localStorage.removeItem('token');
   }

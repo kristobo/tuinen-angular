@@ -1,6 +1,7 @@
 import {  RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
+import { LoginResetComponent } from './login/login-reset.component';
 import { TaskListComponent } from './task//task-list.component';
 import { TaskDetailComponent } from './task/task-detail.component';
 import { MaterialListComponent } from './material/material-list.component';
@@ -12,6 +13,7 @@ import { LoggedInGuard } from './auth/logged-in-guard.service';
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
+    { path: 'login/reset', component: LoginResetComponent },
     { path: 'tasks', component: TaskListComponent, canActivate: [LoggedInGuard] },
     { path: 'task/map', component: MapComponent, canActivate: [LoggedInGuard] },
     { path: 'task/:id', component: TaskDetailComponent, canActivate: [LoggedInGuard] },
